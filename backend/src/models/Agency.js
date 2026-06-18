@@ -50,5 +50,10 @@ const Agency = sequelize.define(
     updatedAt: "updated_at"
   }
 );
-
+Agency.associate = (models) => {
+    Agency.hasMany(models.Trip, {
+        foreignKey: "agency_id",
+        as: "trips"
+    });
+};
 module.exports = Agency;

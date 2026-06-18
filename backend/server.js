@@ -7,6 +7,8 @@ const Role = require("./src/models/Role");
 const User = require("./src/models/User");
 const Destination = require("./src/models/Destination");
 const Agency = require("./src/models/Agency");
+const Trip = require("./src/models/Trip");
+const TripDay = require("./src/models/TripDay");
 
 const app = express();
 
@@ -34,6 +36,8 @@ pool.connect()
         console.log("User model loaded :", User.name);
         console.log("Destination model loaded :", Destination.name);
         console.log("Agency model loaded :", Agency.name);
+        console.log("Trip model loaded :", Trip.name);
+        console.log("TripDay model loaded :", TripDay.name);
     })
     .catch((error) => {
         console.error("Sequelize connection error :", error);
