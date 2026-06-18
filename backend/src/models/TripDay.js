@@ -1,6 +1,5 @@
 const { DataTypes } = require("sequelize");
-const sequelize = require("./index");
-
+const sequelize = require("../config/sequelize");
 const TripDay = sequelize.define(
   "TripDay",
   {
@@ -39,6 +38,17 @@ TripDay.associate = (models) => {
     TripDay.belongsTo(models.Trip, {
         foreignKey: "trip_id",
         as: "trip"
+    });
+};
+TripDay.associate = (models) => {
+    TripDay.belongsTo(models.Trip, {
+        foreignKey: "trip_id",
+        as: "trip"
+    });
+
+    TripDay.hasMany(models.TripStop, {
+        foreignKey: "trip_day_id",
+        as: "stops"
     });
 };
 module.exports = TripDay;

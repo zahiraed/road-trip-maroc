@@ -2,13 +2,16 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const pool = require("./src/config/database");
-const sequelize = require("./src/models");
+const { sequelize } = require("./src/models");
 const Role = require("./src/models/Role");
 const User = require("./src/models/User");
 const Destination = require("./src/models/Destination");
 const Agency = require("./src/models/Agency");
 const Trip = require("./src/models/Trip");
 const TripDay = require("./src/models/TripDay");
+const TripStop = require("./src/models/TripStop");
+const Booking = require("./src/models/Booking");
+const Payment = require("./src/models/Payment");
 
 const app = express();
 
@@ -38,6 +41,10 @@ pool.connect()
         console.log("Agency model loaded :", Agency.name);
         console.log("Trip model loaded :", Trip.name);
         console.log("TripDay model loaded :", TripDay.name);
+        console.log("TripStop model loaded :", TripStop.name);
+        console.log("Booking model loaded :", Booking.name);
+        console.log("Payment model loaded :", Payment.name);
+        console.log("Booking-Payment relation loaded");
     })
     .catch((error) => {
         console.error("Sequelize connection error :", error);

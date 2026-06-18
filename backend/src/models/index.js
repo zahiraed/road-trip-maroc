@@ -1,15 +1,19 @@
-const { Sequelize } = require("sequelize");
+const sequelize = require("../config/sequelize");
+const Booking = require("./Booking");
+const Payment = require("./Payment");
 
-const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
-  {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    dialect: "postgres",
-    logging: false
-  }
-);
+Booking.hasMany(Payment, {
+    foreignKey: "booking_id",
+    as: "payments"
+});
 
-module.exports = sequelize;
+Payment.belongsTo(Booking, {
+    foreignKey: "booking_id",
+    as: "booking"
+});
+
+module.exports = {
+    sequelize,
+    Booking,
+    Payment
+};
