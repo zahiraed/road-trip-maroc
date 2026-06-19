@@ -13,6 +13,31 @@ class DestinationRepository {
     async create(data) {
         return await Destination.create(data);
     }
+    async update(id, data) {
+        const destination =
+            await Destination.findByPk(id);
+
+        if (!destination) {
+            return null;
+        }
+
+        await destination.update(data);
+
+        return destination;
+    }
+
+    async delete(id) {
+        const destination =
+            await Destination.findByPk(id);
+
+        if (!destination) {
+            return false;
+        }
+
+        await destination.destroy();
+
+        return true;
+    }
 }
 
 module.exports = new DestinationRepository();

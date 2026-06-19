@@ -13,6 +13,7 @@ const TripStop = require("./src/models/TripStop");
 const Booking = require("./src/models/Booking");
 const Payment = require("./src/models/Payment");
 
+
 const app = express();
 
 app.use(cors());
@@ -49,6 +50,11 @@ pool.connect()
     .catch((error) => {
         console.error("Sequelize connection error :", error);
     });
+    
+const destinationRoutes =
+require("./src/routes/destinationRoutes");
+app.use("/api/destinations", destinationRoutes);
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
