@@ -12,8 +12,35 @@ const TripDay = require("./src/models/TripDay");
 const TripStop = require("./src/models/TripStop");
 const Booking = require("./src/models/Booking");
 const Payment = require("./src/models/Payment");
-
-
+const ContactMessage =
+    require("./src/models/ContactMessage");
+const destinationRoutes =
+require("./src/routes/destinationRoutes");
+const agencyRoutes =
+    require("./src/routes/agencyRoutes");
+const tripRoutes =
+    require("./src/routes/tripRoutes");
+const tripDayRoutes =
+    require("./src/routes/tripDayRoutes");
+const tripStopRoutes =
+    require("./src/routes/tripStopRoutes");
+    const bookingRoutes =
+    require("./src/routes/bookingRoutes");
+const paymentRoutes =
+    require("./src/routes/paymentRoutes");
+const authRoutes =
+    require("./src/routes/authRoutes");   
+const Favorite = require("./src/models/Favorite"); 
+const favoriteRoutes =  
+    require("./src/routes/favoriteRoutes");
+const reviewRoutes =
+    require("./src/routes/reviewRoutes");
+const newsletterRoutes =
+    require("./src/routes/newsletterRoutes");
+    const contactMessageRoutes =
+    require("./src/routes/contactMessageRoutes"); 
+    const userRoutes =
+    require("./src/routes/userRoutes");  
 const app = express();
 
 app.use(cors());
@@ -46,15 +73,42 @@ pool.connect()
         console.log("Booking model loaded :", Booking.name);
         console.log("Payment model loaded :", Payment.name);
         console.log("Booking-Payment relation loaded");
+        console.log("Favorite model loaded :", Favorite.name);
+        console.log(
+            "ContactMessage model loaded :",
+            ContactMessage.name
+        );
     })
     .catch((error) => {
         console.error("Sequelize connection error :", error);
     });
     
-const destinationRoutes =
-require("./src/routes/destinationRoutes");
-app.use("/api/destinations", destinationRoutes);
 
+app.use("/api/destinations", destinationRoutes);
+app.use("/api/agencies", agencyRoutes);
+app.use("/api/trips", tripRoutes);
+app.use("/api/trip-days", tripDayRoutes);
+app.use("/api/trip-stops", tripStopRoutes);
+app.use("/api/bookings", bookingRoutes);
+app.use("/api/payments", paymentRoutes);
+app.use("/api/auth", authRoutes);
+app.use(
+    "/api/favorites",
+    favoriteRoutes
+);
+app.use("/api/reviews", reviewRoutes);
+app.use(
+    "/api/newsletter",
+    newsletterRoutes
+);
+app.use(
+    "/api/contact-messages",
+    contactMessageRoutes
+);
+app.use(
+    "/api/users",
+    userRoutes
+);
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

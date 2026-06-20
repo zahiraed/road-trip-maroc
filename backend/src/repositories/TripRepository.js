@@ -28,7 +28,7 @@ class TripRepository {
         const trip = await Trip.findByPk(id);
 
         if (!trip) {
-            return null;
+            return false;
         }
 
         await trip.destroy();

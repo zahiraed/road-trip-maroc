@@ -10,7 +10,12 @@ const TripStop = require("./TripStop");
 const Booking = require("./Booking");
 const Payment = require("./Payment");
 
-
+const Favorite = require("./Favorite");
+const Review = require("./Review");
+const Newsletter =
+    require("./Newsletter");
+    const ContactMessage =
+    require("./ContactMessage");  
 // =====================
 // Role ↔ User
 // =====================
@@ -25,7 +30,25 @@ User.belongsTo(Role, {
     as: "role"
 });
 
+User.hasMany(Favorite, {
+    foreignKey: "user_id",
+    as: "favorites"
+});
 
+Favorite.belongsTo(User, {
+    foreignKey: "user_id",
+    as: "user"
+});
+
+Trip.hasMany(Favorite, {
+    foreignKey: "trip_id",
+    as: "favorites"
+});
+
+Favorite.belongsTo(Trip, {
+    foreignKey: "trip_id",
+    as: "trip"
+});
 // =====================
 // Agency ↔ Trip
 // =====================
@@ -45,15 +68,7 @@ Trip.belongsTo(Agency, {
 // Destination ↔ Trip
 // =====================
 
-Destination.hasMany(Trip, {
-    foreignKey: "destination_id",
-    as: "trips"
-});
-
-Trip.belongsTo(Destination, {
-    foreignKey: "destination_id",
-    as: "destination"
-});
+//
 
 
 // =====================
@@ -84,7 +99,15 @@ TripStop.belongsTo(TripDay, {
     foreignKey: "trip_day_id",
     as: "day"
 });
+Destination.hasMany(TripStop, {
+    foreignKey: "destination_id",
+    as: "tripStops"
+});
 
+TripStop.belongsTo(Destination, {
+    foreignKey: "destination_id",
+    as: "destination"
+});
 
 // =====================
 // User ↔ Booking
@@ -129,6 +152,33 @@ Payment.belongsTo(Booking, {
     foreignKey: "booking_id",
     as: "booking"
 });
+// =====================
+// User ↔ Review
+// =====================
+
+User.hasMany(Review, {
+    foreignKey: "user_id",
+    as: "reviews"
+});
+
+Review.belongsTo(User, {
+    foreignKey: "user_id",
+    as: "user"
+});
+
+// =====================
+// Trip ↔ Review
+// =====================
+
+Trip.hasMany(Review, {
+    foreignKey: "trip_id",
+    as: "reviews"
+});
+
+Review.belongsTo(Trip, {
+    foreignKey: "trip_id",
+    as: "trip"
+});
 
 module.exports = {
     sequelize,
@@ -140,5 +190,9 @@ module.exports = {
     TripDay,
     TripStop,
     Booking,
-    Payment
+    Payment,
+    Favorite,
+    Review,
+    Newsletter,
+    ContactMessage
 };

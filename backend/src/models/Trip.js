@@ -1,71 +1,60 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/sequelize");
+
 const Trip = sequelize.define(
-  "Trip",
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
+    "Trip",
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
 
-    agency_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
+        agency_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
 
-    title: {
-      type: DataTypes.STRING(255),
-      allowNull: false
-    },
+        title: {
+            type: DataTypes.STRING(255),
+            allowNull: false
+        },
 
-    description: {
-      type: DataTypes.TEXT
-    },
+        description: {
+            type: DataTypes.TEXT
+        },
 
-    duration_days: {
-      type: DataTypes.INTEGER
-    },
+        duration_days: {
+            type: DataTypes.INTEGER
+        },
 
-    price: {
-      type: DataTypes.DECIMAL(10,2)
-    },
+        price: {
+            type: DataTypes.DECIMAL(10, 2)
+        },
 
-    max_people: {
-      type: DataTypes.INTEGER
-    },
+        max_participants: {
+            type: DataTypes.INTEGER
+        },
 
-    image_url: {
-      type: DataTypes.TEXT
-    },
+        difficulty_level: {
+            type: DataTypes.STRING(50)
+        },
 
-    is_featured: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false
+        image_url: {
+            type: DataTypes.TEXT
+        },
+
+        is_active: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true
+        }
+    },
+    {
+        tableName: "trips",
+        timestamps: true,
+        createdAt: "created_at",
+        updatedAt: "updated_at"
     }
-  },
-  {
-    tableName: "trips",
-    timestamps: true,
-    createdAt: "created_at",
-    updatedAt: "updated_at"
-  }
 );
-Trip.associate = (models) => {
-    Trip.belongsTo(models.Agency, {
-        foreignKey: "agency_id",
-        as: "agency"
-    });
-};
-Trip.associate = (models) => {
-    Trip.belongsTo(models.Agency, {
-        foreignKey: "agency_id",
-        as: "agency"
-    });
 
-    Trip.hasMany(models.TripDay, {
-        foreignKey: "trip_id",
-        as: "days"
-    });
-};
 module.exports = Trip;

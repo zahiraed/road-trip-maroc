@@ -3,10 +3,15 @@ const router = express.Router();
 
 const destinationController =
     require("../controllers/DestinationController");
+const authMiddleware =
+    require("../middlewares/authMiddleware");
 
-router.get("/", (req, res) =>
-    destinationController.getAll(req, res)
-);
+    router.get(
+        "/",
+        authMiddleware,
+        (req, res) =>
+            destinationController.getAll(req, res)
+    );
 
 router.get("/:id", (req, res) =>
     destinationController.getById(req, res)

@@ -34,16 +34,14 @@ const Booking = sequelize.define(
       allowNull: false
     },
 
-    status: {
-      type: DataTypes.STRING(50),
-      defaultValue: "PENDING"
+    booking_status: {
+        type: DataTypes.STRING(50),
+        defaultValue: "PENDING"
     }
   },
   {
     tableName: "bookings",
-    timestamps: true,
-    createdAt: "created_at",
-    updatedAt: "updated_at"
+    timestamps: false
   }
 );
 
